@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GPREC.IN - Attendance Calculator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #121212; /* Dark Mode */
+      color: #ffffff;
+    }
+
+    .page {
+      display: none;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .active {
+      display: flex;
+    }
+
+    /* Home Page Styling */
+    #homePage {
+      background-color: #121212;
+    }
+
+    h1 {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 30px;
+    }
+
+    .start-button {
+      padding: 12px 28px;
+      font-size: 18px;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      background-color: #00bfff;
+      color: white;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+
+    .start-button:hover {
+      background-color: #0099cc;
+    }
+
+    .calculator {
+      background-color: #1e1e1e;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+      width: 100%;
+      max-width: 350px;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      background-color: #2c2c2c;
+      color: #fff;
+      border: 1px solid #555;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    #result {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #00ff99;
+    }
+
+    #note {
+      color: #ff4d4d;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+    .instagram-link {
+      margin-top: 20px;
+      font-size: 14px;
+    }
+
+    .instagram-link a {
+      color: #e1306c;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    button {
+      font-family: 'Poppins', sans-serif;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Home Page -->
+  <div id="homePage" class="page active">
+    <!-- Removed logo image -->
+    <h1>Welcome to <span style="color:#00bfff;">GPREC.IN</span></h1>
+    <button class="start-button" onclick="showCalculator()">Attendance Kavalaaa</button>
+  </div>
+
+  <!-- Calculator Page -->
+  <div id="calculatorPage" class="page">
+    <h2>Attendance Calculator</h2>
+    <div class="calculator">
+      <label>Total Classes:</label>
+      <input type="number" id="total" placeholder="Enter total classes">
+
+      <label>Presented Classes:</label>
+      <input type="number" id="presented" placeholder="Enter presented classes">
+
+      <button onclick="calculateAttendance()">Calculate</button>
+
+      <p id="result"></p>
+      <p id="note"></p>
+
+      <div class="instagram-link">
+        Follow us on Instagram: 
+        <a href="https://www.instagram.com/gprec.in" target="_blank">gprec.in</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showCalculator() {
+      document.getElementById("homePage").classList.remove("active");
+      document.getElementById("calculatorPage").classList.add("active");
+    }
+
+    function calculateAttendance() {
+      const total = parseFloat(document.getElementById('total').value);
+      const presented = parseFloat(document.getElementById('presented').value);
+      const result = document.getElementById('result');
+      const note = document.getElementById('note');
+
+      result.textContent = '';
+      note.textContent = '';
+
+      if (isNaN(total) || isNaN(presented)) {
+        result.textContent = "Please enter valid numbers.";
+        return;
+      }
+
+      if (total <= 0 || presented < 0 || presented > total) {
+        result.textContent = "Enter valid class numbers.";
+        return;
+      }
+
+      const attendance = (presented / total) * 100;
+      result.textContent = `Your attendance is ${attendance.toFixed(2)}%`;
+
+      if (attendance < 75) {
+        note.textContent = "Note: class ki velli sadhuvukoo guru, bunks kottindhi chalu lee inkaa 😅";
+      }
+    }
+  </script>
+</body>
+</html>
